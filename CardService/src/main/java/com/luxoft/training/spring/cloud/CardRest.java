@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CardRest {
     @Autowired
-    CardNumberGenerator cardNumberGenerator;
+    private CardNumberGenerator cardNumberGenerator;
 
-    @RequestMapping("/create")
-    public ResponseEntity<?> createCard() {
-        return ResponseEntity.ok(cardNumberGenerator.generate());
+    @RequestMapping("create")
+    public String createCard() {
+        return cardNumberGenerator.generate();
     }
 
 }

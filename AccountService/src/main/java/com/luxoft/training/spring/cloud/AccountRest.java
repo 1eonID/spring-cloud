@@ -19,19 +19,19 @@ public class AccountRest {
     AccountRepository accountRepository;
 
     @RequestMapping("/create")
-    public void createClient(@RequestParam Integer id) {
-        accountDAO.create(id);
+    public void createClient(@RequestParam("clientId") Integer clientId) {
+        accountDAO.create(clientId);
     }
 
-    @RequestMapping("/fund")
-    public void fundClient(@RequestParam Integer id,
+    @RequestMapping("/fund/{id}")
+    public void fundClient(@PathVariable Integer id,
                            @RequestParam BigDecimal sum) {
 
         accountDAO.addBalance(id, sum.abs());
     }
 
-    @RequestMapping("/checkout")
-    public void checkoutClient(@RequestParam Integer id,
+    @RequestMapping("/checkout/{id}")
+    public void checkoutClient(@PathVariable Integer id,
                            @RequestParam BigDecimal sum) {
 
         accountDAO.addBalance(id, sum.abs().negate());

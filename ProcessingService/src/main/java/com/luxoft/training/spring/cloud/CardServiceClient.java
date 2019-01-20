@@ -3,8 +3,8 @@ package com.luxoft.training.spring.cloud;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient("CardService")
+@FeignClient(name = "CardService", fallback = CardServiceFallback.class)
 public interface CardServiceClient {
-    @RequestMapping("/create")
-    CardService createCard();
+    @RequestMapping("create")
+    String createCard();
 }
