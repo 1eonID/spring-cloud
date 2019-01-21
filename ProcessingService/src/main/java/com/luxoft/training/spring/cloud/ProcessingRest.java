@@ -1,5 +1,6 @@
 package com.luxoft.training.spring.cloud;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,5 +55,18 @@ public class ProcessingRest {
             map.put(entity.getAccountId(), entity.getCard());
         }
         return map;
+    }
+
+    @HystrixCommand(fallbackMethod = "testFallback")
+    @RequestMapping("/test")
+    public String testHystrix(Boolean fail) {
+        if (Boolean.TRUE.equals(fail)) {
+            throw new RuntimeException();
+        }
+        return "OK";
+    }
+
+    private String testFallback(Boolean fail) {
+        return "FAILED";
     }
 }
