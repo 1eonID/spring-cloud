@@ -11,6 +11,6 @@ import java.util.List;
 @FeignClient(name = "AccountService", fallback = AccountServiceFallback.class)
 public interface AccountServiceClient {
     @RequestMapping("/checkout/{id}")
-    boolean checkout(@PathVariable("id") Integer id,
+    boolean checkout(@PathVariable("id") Integer accountId,
                      @RequestParam("sum") BigDecimal sum);
 }

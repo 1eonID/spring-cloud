@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Component
 public class AccountServiceFallback implements AccountServiceClient {
     @Override
-    public boolean checkout(@PathVariable("id") Integer id,
+    public boolean checkout(@PathVariable("id") Integer accountId,
                             @RequestParam BigDecimal sum) {
         return false;
     }
